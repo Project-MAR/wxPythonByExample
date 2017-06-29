@@ -3,8 +3,7 @@
 import wx
 from Ex02_browseFileDlg import browseFile
    
-app = wx.App(False)
-frame = browseFile(None)
-frame.Show(True)
-
+app  =  wx.App() 
+c    = browseFile(None)
+c.ShowModal()
 app.MainLoop()

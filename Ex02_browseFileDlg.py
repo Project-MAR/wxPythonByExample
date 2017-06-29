@@ -14,34 +14,46 @@ import wx.xrc
 ## Class browseFile
 ###########################################################################
 
-class browseFile ( wx.Frame ):
+class browseFile ( wx.Dialog ):
     
     def __init__( self, parent ):
-        wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = u"Select a File", pos = wx.DefaultPosition, size = wx.Size( 549,102 ), style = wx.DEFAULT_FRAME_STYLE|wx.TAB_TRAVERSAL )
+        wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, pos = wx.DefaultPosition, size = wx.Size( 577,90 ), style = wx.DEFAULT_DIALOG_STYLE )
         
         self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
         
-        Sizers = wx.BoxSizer( wx.VERTICAL )
+        bSizers = wx.BoxSizer( wx.VERTICAL )
         
         self.filePicker = wx.FilePickerCtrl( self, wx.ID_ANY, wx.EmptyString, u"Select a file", u"*.*", wx.DefaultPosition, wx.DefaultSize, wx.FLP_DEFAULT_STYLE )
-        Sizers.Add( self.filePicker, 0, wx.ALL|wx.EXPAND, 5 )
+        bSizers.Add( self.filePicker, 1, wx.ALL|wx.EXPAND, 5 )
         
-        sdbSizer = wx.StdDialogButtonSizer()
-        self.sdbSizerOK = wx.Button( self, wx.ID_OK )
-        sdbSizer.AddButton( self.sdbSizerOK )
-        self.sdbSizerCancel = wx.Button( self, wx.ID_CANCEL )
-        sdbSizer.AddButton( self.sdbSizerCancel )
-        sdbSizer.Realize();
+        m_OkCencel_sdbSizer = wx.StdDialogButtonSizer()
+        self.m_OkCencel_sdbSizerOK = wx.Button( self, wx.ID_OK )
+        m_OkCencel_sdbSizer.AddButton( self.m_OkCencel_sdbSizerOK )
+        self.m_OkCencel_sdbSizerCancel = wx.Button( self, wx.ID_CANCEL )
+        m_OkCencel_sdbSizer.AddButton( self.m_OkCencel_sdbSizerCancel )
+        m_OkCencel_sdbSizer.Realize()
         
-        Sizers.Add( sdbSizer, 1, wx.EXPAND, 5 )
+        bSizers.Add( m_OkCencel_sdbSizer, 1, wx.EXPAND, 5 )
         
         
-        self.SetSizer( Sizers )
+        self.SetSizer( bSizers )
         self.Layout()
         
         self.Centre( wx.BOTH )
+        
+        # Connect Events
+        self.m_OkCencel_sdbSizerCancel.Bind( wx.EVT_BUTTON, self.onCANCEL_Click )
+        self.m_OkCencel_sdbSizerOK.Bind( wx.EVT_BUTTON, self.onOK_Click )
     
     def __del__( self ):
         pass
     
     
+    # Virtual event handlers, overide them in your derived class
+    def onCANCEL_Click( self, event ):
+        event.Skip()
+    
+    def onOK_Click( self, event ):
+        event.Skip()
+    
+
