@@ -31,7 +31,7 @@ class browseFile ( wx.Dialog ):
         m_OkCencel_sdbSizer.AddButton( self.m_OkCencel_sdbSizerOK )
         self.m_OkCencel_sdbSizerCancel = wx.Button( self, wx.ID_CANCEL )
         m_OkCencel_sdbSizer.AddButton( self.m_OkCencel_sdbSizerCancel )
-        m_OkCencel_sdbSizer.Realize()
+        m_OkCencel_sdbSizer.Realize();
         
         bSizers.Add( m_OkCencel_sdbSizer, 1, wx.EXPAND, 5 )
         
@@ -42,6 +42,7 @@ class browseFile ( wx.Dialog ):
         self.Centre( wx.BOTH )
         
         # Connect Events
+        self.filePicker.Bind( wx.EVT_FILEPICKER_CHANGED, self.onFileChange )
         self.m_OkCencel_sdbSizerCancel.Bind( wx.EVT_BUTTON, self.onCANCEL_Click )
         self.m_OkCencel_sdbSizerOK.Bind( wx.EVT_BUTTON, self.onOK_Click )
     
@@ -50,6 +51,9 @@ class browseFile ( wx.Dialog ):
     
     
     # Virtual event handlers, overide them in your derived class
+    def onFileChange( self, event ):
+        event.Skip()
+    
     def onCANCEL_Click( self, event ):
         event.Skip()
     
